@@ -6,18 +6,19 @@ const UserSchema = new Schema({
     type: String,
     trim: true,
     unique: true,
-    required: "Username is Required",
+    required: [true, "Username is required"],
   },
   password: {
     type: String,
     trim: true,
-    required: "Password is Required",
-    minlength: 6,
+    required: [true, "Password is required"],
+    minlength: [4, "Password must be at least 4 characters long"],
   },
   email: {
     type: String,
+    required: [true, "Email is required"],
     unique: true,
-    match: [/.+@.+\..+/],
+    match: [/.+@.+\..+/, "Please enter a valid email address"],
   },
   cardio: [{
     type: Schema.Types.ObjectId,
@@ -29,7 +30,7 @@ const UserSchema = new Schema({
   }]
 });
 
-// hash user password
+// Hash user password
 UserSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
@@ -39,7 +40,7 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-// custom method to compare and validate password for logging in
+// Custom method to compare and validate password for login
 UserSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
