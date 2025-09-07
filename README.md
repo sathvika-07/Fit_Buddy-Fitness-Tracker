@@ -24,5 +24,3 @@ Progress Tracking – View fitness progress over time
 Responsive UI – Works seamlessly across desktop and mobile  
 Real-World Usability – Simple, clean, and designed for everyday use 
 
-- [Email](wwtian9@gmail.com)
-- [Github Profile](https://github.com/joce1ynn)
